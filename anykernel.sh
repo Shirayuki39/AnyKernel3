@@ -20,10 +20,10 @@ supported.vendorpatchlevels=
 ### AnyKernel install
 
 ## Boot shell variables
-block=boot
-is_slot_device=1
-ramdisk_compression=auto
-patch_vbmeta_flag=auto
+BLOCK=boot
+IS_SLOT_DEVICE=1
+RAMDISK_COMPRESSION=auto
+PATCH_VBMETA_FLAG=auto
 
 # Import functions/variables and setup patching - see for reference (DO NOT REMOVE)
 . tools/ak3-core.sh
@@ -32,7 +32,7 @@ patch_vbmeta_flag=auto
 
 split_boot # Use split_boot to skip ramdisk unpack, e.g., for devices with init_boot ramdisk
 
-ui_print "- $(strings "${home}"/Image 2>/dev/null | grep -E -m1 'Linux version.*#' | awk '{print $3}')"
+ui_print "- $(strings "${AKHOME}"/Image 2>/dev/null | grep -E -m1 'Linux version.*#' | awk '{print $3}')"
 
 flash_boot # Use flash_boot to skip ramdisk repack, e.g., for devices with init_boot ramdisk
 
