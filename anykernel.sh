@@ -10,7 +10,7 @@ do.modules=0
 do.systemless=1
 do.cleanup=1
 do.cleanuponabort=0
-device.name1=
+device.name1=duchamp
 device.name2=
 supported.versions=
 supported.patchlevels=
@@ -30,10 +30,13 @@ PATCH_VBMETA_FLAG=auto
 
 ## Start boot install
 
-split_boot # Use split_boot to skip ramdisk unpack, e.g., for devices with init_boot ramdisk
-
-ui_print "- $(strings "${AKHOME}"/Image 2>/dev/null | grep -E -m1 'Linux version.*#' | awk '{print $3}')"
-
-flash_boot # Use flash_boot to skip ramdisk repack, e.g., for devices with init_boot ramdisk
-
+# boot install
+if [ -L "/dev/block/bootdevice/by-name/init_boot_a" -o -L "/dev/block/by-name/init_boot_a" ]; then
+    split_boot # for devices with init_boot ramdisk
+    ui_print "- $(strings "${AKHOME}"/Image 2>/dev/null | grep -E -m1 'Linux version.*#' | awk '{print $3}')"
+    flash_boot # for devices with init_boot ramdisk
+else
+    dump_boot # use split_boot to skip ramdisk unpack, e.g. for devices with init_boot ramdisk
+    write_boot # use flash_boot to skip ramdisk repack, e.g. for devices with init_boot ramdisk
+fi
 ## End boot install
