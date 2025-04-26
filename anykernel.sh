@@ -4,7 +4,7 @@
 ### AnyKernel setup
 # Global properties
 properties() { '
-kernel.string=MahiruShiina GKI Kernel for android12-5.10 devices by @shirayuki_428
+kernel.string=Castorice GKI Kernel for android14-6.1 devices by @shirayuki_428
 do.devicecheck=0
 do.modules=0
 do.systemless=1
